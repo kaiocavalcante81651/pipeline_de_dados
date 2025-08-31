@@ -19,6 +19,9 @@ services:
     ports:
       - "8123:8123" # Interface HTTP
       - "8000:9000" # Interface TCP
+    environment:
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=default
     volumes:
       - clickhouse_data:/var/lib/clickhouse
 

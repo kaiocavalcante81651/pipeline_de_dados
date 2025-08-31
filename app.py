@@ -1,49 +1,23 @@
-from minio import Minio
-from minio.error import S3Error
-import pandas as pd
+from ingestion.ingestion import minio
+import clickhouse_connect
 
-
-# Conexão com o minio
 try:
-    client = Minio(
-        "localhost:9000",           # Porta da API minio
-        access_key="minioadmin",    # MINIO_ROOT_USER
-        secret_key="minioadmin",    # MINIO_ROOT_PASSWORD
-        secure=False                # protocolo HTTP
+    # Cria o cliente
+    client = clickhouse_connect.get_client(
+        host='localhost',       # Host onde o clickhouse está rodando
+        port=8123,              # Porta HTTP
+        username='default',     # Usuário padrão
+        password='default',            # Senha, vazia por padrão
+        database='default',     # Banco de dados padrão (para testar)
+        secure=False            # Não utiliza HTTPS
     )
-except S3Error as error:
+except TypeError as error:
     print(error)
 
-# Variáveis com os nomes do bucket e do objeto
-bucket_name = 'dados-iot'
-object_name = 'IOT-temp.csv'
-
-# Variável que recebe o objeto (arquivo csv) do minio
-response = client.get_object(bucket_name, object_name)
-
-
-# Função para exibir dados sobre a estrutura do arquivo
-def arquivo():
-    # Carrega o arquivo com o pandas
-    df = pd.read_csv(response)
-
-    # Formata a coluna 'id'
-    df["id"] = df['id'].str[16:]
-
-    # Exibe o arquivo, as 5 primeiras linhas
-    print(df.head())
-
-    # Variáveis que armazenam quantidades de linhas e colunas
-    num_linhas = df.shape[0]
-    num_colunas = df.shape[1]
-
-    # Exibe dados sobre a estrutura do arquivo
-    print(f'O arquivo contém: {num_linhas} linhas.')
-    print(f'O arquivo contém: {num_colunas} colunas.')
-    print('As colunas do arquivo são: ', df.columns.to_list())
-
+result = client.query('SHOW TABLES')
 
 # Executa as funções
 if __name__ == '__main__':
-    arquivo()
+    minio()
+    print(result)
 
