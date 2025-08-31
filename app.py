@@ -3,8 +3,8 @@ from minio.error import S3Error
 import pandas as pd
 
 
+# Conexão com o minio
 try:
-    # Conexão com o minio
     client = Minio(
         "localhost:9000",           # Porta da API minio
         access_key="minioadmin",    # MINIO_ROOT_USER

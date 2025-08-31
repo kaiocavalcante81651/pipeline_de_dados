@@ -12,3 +12,15 @@ services:
       - ./minio_data:/data
     command: server /data --console-address ":9001"
     restart: always
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.8-alpine
+    container_name: clickhouse
+    ports:
+      - "8123:8123" # Interface HTTP
+      - "8000:9000" # Interface TCP
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+
+volumes:
+  clickhouse_data:
