@@ -27,16 +27,8 @@ def minio():
 
     # Formata a coluna 'id'
     df["id"] = df['id'].str[16:]
-
-    # Variáveis que armazenam quantidades de linhas e colunas
-    num_linhas = df.shape[0]
-    num_colunas = df.shape[1]
+    df['noted_date'] = pd.to_datetime(df['noted_date'], dayfirst=True)
     
     return(
-        # Exibe o arquivo, as 5 primeiras linhas
-        print(df.head()),
-        # Exibe dados sobre a estrutura do arquivo
-        print(f'O arquivo contém: {num_linhas} linhas.'),
-        print(f'O arquivo contém: {num_colunas} colunas.'),
-        print('As colunas do arquivo são: ', df.columns.to_list())
+        df
     )
