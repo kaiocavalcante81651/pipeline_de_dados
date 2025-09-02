@@ -1,4 +1,7 @@
 import clickhouse_connect
+from ingestion.objeto import minio_objeto
+
+objeto = minio_objeto()
 
 try:
     # Cria o cliente
@@ -26,5 +29,20 @@ def criar_banco_de_dados():
             "out/in" String
         )
         ENGINE = MergeTree()
+        PRIMARY KEY id
         ORDER BY id
-""")
+    """)
+    
+def inserir_dados():
+    df = objeto.rename(columns={
+        'id'        : 'logs',
+        'room_id/id': 'sala',
+        'noted_date': 'data',
+        'temp'      : 'temperatura',
+        'out/in'    : 'out/in'
+    })
+    client.insert_df(table='dados_iot', df=df)
+
+def retorna_dados():
+    dados = client.query_df("SELECT * FROM dados_iot")
+    return dados

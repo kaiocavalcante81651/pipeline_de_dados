@@ -21,7 +21,7 @@ object_name = 'IOT-temp.csv'
 # Variável que recebe o objeto (arquivo csv) do minio
 response = client.get_object(bucket_name, object_name)
 
-def minio():
+def minio_objeto():
    # Carrega o arquivo com o pandas
     df = pd.read_csv(response)
 
