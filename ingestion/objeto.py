@@ -5,8 +5,7 @@ import pandas as pd
 # Conexão com o minio
 try:
     client = Minio(
-        #"localhost:9000",           # Porta da API minio
-        "minio:9000",
+        "minio:9000",               # Porta da API minio
         access_key="minioadmin",    # MINIO_ROOT_USER
         secret_key="minioadmin",    # MINIO_ROOT_PASSWORD
         secure=False                # protocolo HTTP

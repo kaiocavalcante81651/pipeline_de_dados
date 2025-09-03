@@ -4,9 +4,9 @@ import plotly.express as px
 from database.db import temperaturas, retorna_dados, data_temperatura
 
 def exibir():
-    st.title("Dashboard de Temperaturas IoT")
+    st.title("Dashboard de Temperaturas IoT")       # Titulo da página
 
-    menu = st.sidebar.selectbox(
+    menu = st.sidebar.selectbox(                    # Menu lateral
         "Escolha uma opção",
         ["Tabelas", "Gráficos"]
     )

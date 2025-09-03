@@ -7,20 +7,19 @@ objeto = minio_objeto()
 try:
     # Cria o cliente
     client = clickhouse_connect.get_client(
-        #host='localhost',       # Host onde o clickhouse está rodando
-        host='clickhouse',
+        host='clickhouse',      # Host onde o clickhouse está rodando
         port=8123,              # Porta HTTP
         username='default',     # Usuário padrão
-        password='default',            # Senha, vazia por padrão
-        database='',     # Banco de dados padrão (para testar)
+        password='default',     # Senha, vazia por padrão
+        database='',            # Banco de dados padrão (para testar)
         secure=False            # Não utiliza HTTPS
     )
 except TypeError as error:
     print(error)
 
 def criar_banco_de_dados():
-    client.command("CREATE DATABASE IF NOT EXISTS db_iot_data")
-    client.command("USE db_iot_data")
+    client.command("CREATE DATABASE IF NOT EXISTS db_iot_data")  # Cria o banco de dados
+    client.command("USE db_iot_data")                            # Seleciona o banco criado
     client.command("""
         CREATE TABLE IF NOT EXISTS dados_iot (
             id UUID DEFAULT generateUUIDv4(),
@@ -51,7 +50,7 @@ def retorna_dados():
 
 def temperaturas():
 
-    consulta = "SELECT * FROM temp_por_dispositivo;"
+    consulta = "SELECT * FROM temp_por_dispositivo;"        # Consulta a view criada no banco de dados
 
     result = client.query(consulta)
     df = pd.DataFrame(result.result_rows, columns=result.column_names)
@@ -59,7 +58,7 @@ def temperaturas():
 
 def data_temperatura():
 
-    consulta = "SELECT * FROM temp_por_data;"
+    consulta = "SELECT * FROM temp_por_data;"               # Consulta a view criada no banco de dados
 
     result = client.query(consulta)
     df = pd.DataFrame(result.result_rows, columns=result.column_names)
