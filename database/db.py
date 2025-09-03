@@ -1,5 +1,6 @@
 import clickhouse_connect
 from ingestion.objeto import minio_objeto
+import pandas as pd
 
 objeto = minio_objeto()
 
@@ -46,3 +47,17 @@ def inserir_dados():
 def retorna_dados():
     dados = client.query_df("SELECT * FROM dados_iot")
     return dados
+
+def temperaturas():
+    query = """
+        SELECT
+            temperatura
+        FROM
+            dados_iot
+    """
+
+    consulta = "SELECT * FROM temp_por_dispositivo;"
+
+    result = client.query(consulta)
+    df = pd.DataFrame(result.result_rows, columns=result.column_names)
+    return df
