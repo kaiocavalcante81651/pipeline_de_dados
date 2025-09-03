@@ -11,7 +11,7 @@ services:
     volumes:
       - ./minio_data:/data
     command: server /data --console-address ":9001"
-    restart: always
+    #restart: always
 
   clickhouse:
     image: clickhouse/clickhouse-server:25.8-alpine
@@ -24,6 +24,17 @@ services:
       - CLICKHOUSE_PASSWORD=default
     volumes:
       - clickhouse_data:/var/lib/clickhouse
+
+  app:
+    build: .
+    container_name: app_python
+    ports:
+      - "5000:5000"
+    depends_on:
+      - minio
+      - clickhouse
+    volumes:
+      - .:/app
 
 volumes:
   clickhouse_data:

@@ -7,7 +7,8 @@ objeto = minio_objeto()
 try:
     # Cria o cliente
     client = clickhouse_connect.get_client(
-        host='localhost',       # Host onde o clickhouse está rodando
+        #host='localhost',       # Host onde o clickhouse está rodando
+        host='clickhouse',
         port=8123,              # Porta HTTP
         username='default',     # Usuário padrão
         password='default',            # Senha, vazia por padrão
