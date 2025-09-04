@@ -25,7 +25,7 @@ executar o arquivo principal e o docker-compose.yml que gerencia todos os servi�
 necessários em conjunto.
 Na pasta ingestion, foi criado o arquivo objeto.py, que ficou responsável por se
 conectar ao Minio e retornar o objeto como um dataframe.
-Na pasta database, foi criado o arquivo db.py, que se recebe o dataframe com os
+Na pasta database, foi criado o arquivo db.py, que recebe o dataframe com os
 dados do objeto, se conecta ao banco de dados Clickhouse, cria um banco de dados, cria
 uma tabela e insere os dados do dataframe na tabela criada. Feito isso, ele também cria as
 funções necessárias para chamar as views que foram criadas no banco de dados.
@@ -33,7 +33,7 @@ A pasta dashboard, guarda o arquivo apresentacao.py, que recebe os dados
 retornados pelas views e cria o dashboard com streamlit para apresentar os dados tanto em
 tabelas quanto em gráficos.
 O arquivo app.py é o ponto de entrada da aplicação e executas todas as funções.
-Para iniciar o fluxo basta digitar docker compose up –build para colocar os contêineres
+Para iniciar o fluxo basta digitar "docker compose up –-build" para colocar os contêineres
 em execução, a porta 5000 exibirá o dashboard com streamlit onde o usuário poderá
 escolher no menu lateral a exibição das tabelas ou gráficos.
 
