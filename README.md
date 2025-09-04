@@ -37,3 +37,8 @@ Para iniciar o fluxo basta digitar docker compose up –build para colocar os co
 em execução, a porta 5000 exibirá o dashboard com streamlit onde o usuário poderá
 escolher no menu lateral a exibição das tabelas ou gráficos.
 
+<img width="1576" height="886" alt="exibindo_tabelas" src="https://github.com/user-attachments/assets/5c1469fa-e916-4dd7-842c-75666b6d69f6" />
+
+
+
+<img width="1576" height="886" alt="exibindo_graficos" src="https://github.com/user-attachments/assets/2ee0676d-8261-4ca7-b07c-7927d243897c" />
